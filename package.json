@@ -1,0 +1,20 @@
+{
+  "name": "productdisplay",
+  "version": "1.0.0",
+  "description": "An app that consumes data from an FTP server and displays them in a table",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "ftp"
+  ],
+  "author": "Duke Ovie",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.4.0",
+    "express": "^4.17.1",
+    "ftp": "^0.3.10"
+  }
+}
