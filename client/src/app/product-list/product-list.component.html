@@ -1,0 +1,105 @@
+<div class="container-fluid mt-3">
+
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-12">
+                      <form [formGroup]="frmFilter">
+                        <div class="row">
+                          <div class="col-12 mb-3">
+                              <label>Select Column:</label>
+                            <select class="form-select" formControlName="column">
+                              <option *ngFor="let column of getColumns" [value]="column">
+                                {{ column }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-12 mb-3">
+                              <label>Choose Operator:</label>
+                            <select class="form-select" formControlName="operator">
+                              <option *ngFor="let operator of getOperators" [value]="operator">
+                                {{ operator }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-12 mb-3">
+                              <label>Enter Value:</label>
+                            <input class="form-control" formControlName="value" />
+                          </div>
+                          <div class="col-12">
+                            <button
+                              type="button"
+                              class="btn btn-primary btn-block"
+                              (click)="add()"
+                            >
+                              Add
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 mt-4">
+                      <mat-chip-list #chipList aria-label="filter selection">
+                        <mat-chip
+                          color="primary"
+                          *ngFor="let filter of appliedFilters"
+                          [selectable]="true"
+                          [removable]="true"
+                          (removed)="remove(filter)"
+                        >
+                          {{ filter?.column }} {{ filter?.operator }} {{ filter?.value }}
+                          <button matChipRemove *ngIf="true">
+                            <mat-icon>cancel</mat-icon>
+                          </button>
+                        </mat-chip>
+                      </mat-chip-list>
+                    </div>
+                    <div>showing {{ fproducts?.length }} of {{ products?.length }} items</div>
+                  </div>
+            </div>
+
+            <div class="col-9">
+                <div class="row">
+      <div class="col-md-4 mb-3 mt-4">
+        <div>showing {{ fproducts?.length }} of {{ products?.length }} items</div>
+        <table class="table" id="product_table">
+          <tr>
+            <th>id</th>
+            <th>gtin</th>
+            <th>Product Name</th>
+            <th>product Description</th>
+            <th>Price</th>
+            <th>Currency</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Style</th>
+            <th>Color</th>
+          </tr>
+          <tbody *ngFor="let product of fproducts as products">
+            <tr>
+              <td>{{ product.id }}</td>
+              <td>{{ product.gtin }}</td>
+              <td>{{ product.product_name }}</td>
+              <td>{{ product.product_desc }}</td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.currency }}</td>
+              <td>{{ product.category }}</td>
+              <td>{{ product.quantity }}</td>
+              <td>{{ product.style }}</td>
+              <td>{{ product.color }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+            </div>
+        </div>
+
+    
+
+
+    
+  </div>
+  
