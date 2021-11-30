@@ -16,7 +16,7 @@ import { ProductListService } from '../product-list.service';
 export class ProductListComponent implements OnInit {
   loading: boolean = true;
   products: any[] = [];
-  fproducts: any[] | null = null;
+  filteredProducts: any[] | null = null;
   operators: operators = { 'contains': contains, '>': greater, '=': equals };
   columns: string[] = [];
   appliedFilters: any[] = [];
@@ -50,7 +50,7 @@ export class ProductListComponent implements OnInit {
       for (let [key, value] of Object.entries(res)) {
         this.products.push(value);
       }
-      this.fproducts = this.products;
+      this.filteredProducts = this.products;
       this.loading = false;
       this.clear(); // resets filter form
     });
@@ -68,10 +68,10 @@ export class ProductListComponent implements OnInit {
       this.appliedFilters.splice(index, 1);
       // TODO: refilter the UI
       if(this.appliedFilters.length) {
-        this.fproducts = null;
+        this.filteredProducts = null;
         this.filter()
       } else {
-        this.fproducts = this.products;
+        this.filteredProducts = this.products;
       }
   }
 }
@@ -93,7 +93,7 @@ export class ProductListComponent implements OnInit {
 
   filter() {
     this.appliedFilters.forEach((appliedFilter) => {
-      this.fproducts = (this.fproducts || this.products).filter((product) => {
+      this.filteredProducts = (this.filteredProducts || this.products).filter((product) => {
         const key = appliedFilter.column;
         const operatorName = appliedFilter.operator as string;
         const operator = this.operators[operatorName];
